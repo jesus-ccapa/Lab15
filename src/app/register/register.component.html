@@ -1,0 +1,76 @@
+<div class="register-container"><br>
+    <h2>REGISTER</h2>
+    <p class="text-center fs-3" [ngClass]="isAccountCreated ? 'text-success pb-1' : 'text-success pb-1'" >{{displayMsg}}</p>
+
+   <p>Message from parent component = {{recievingdataToRegister}}</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)=" save()">
+        <table>
+           
+            <tr>
+                <td>UserName</td>
+                <td>
+                    <input type="text" name="Name" formControlName="Name" [(ngModel)]="student.name">
+                </td>
+            </tr>
+           
+            <tr>
+                <td>Contact No</td>
+                <td>
+                    <input type="text" name="phone"  formControlName="Phone" [(ngModel)]="student.phone">
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="password"  name="pass" formControlName="pass" [(ngModel)]="student.password">
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <button type="submit" value="SAVE" class="btn btn-primary">SAVE</button>
+                    <br><br>
+                    <a routerLink="/parent/login">Login</a>
+                </td>
+            </tr>
+        </table>
+        </form>
+    
+    </div>
+    
+    <div class="register-container">
+        <h1>Student Details</h1>
+    
+        <table class="table">
+            <thead>
+            <tr>
+                  <th>      ID  </th>
+                    <th>    Name  </th>
+                     <th>   Contact No  </th>
+                    <th>    Password  </th>
+                    <th>    Update </th>
+                    <th>    Delete </th>
+                    <th>    View Data </th>
+                   
+            </tr>
+            </thead>
+        
+            <tbody>
+                    <tr *ngFor="let StudentItem of data; let j=index">
+                       <td>{{StudentItem.id}}</td>
+                        <td>{{ StudentItem.name }}</td>
+                        <td>{{ StudentItem.phone }}</td>
+                        <td>{{ StudentItem.password }}</td> 
+                        
+                      <td>
+                        <button type="button" class="btn btn-success" (click)="edit(StudentItem,j)">Update</button></td>
+                    <td> <button type="button" class="btn btn-danger" (click)="DeleteStudentinfo(StudentItem.id)">Delete</button></td>   
+                    <td>   <a [routerLink]="['/viewdetails/'+StudentItem.id]">View Details</a></td>   
+                      
+                    </tr>
+            </tbody>
+        
+        </table>
+    
+    </div>
